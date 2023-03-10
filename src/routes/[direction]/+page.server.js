@@ -1,13 +1,12 @@
 import { error } from '@sveltejs/kit';
 import { formatISO, sub } from 'date-fns';
-import branches from '$lib/branches.js';
 
 // noinspection JSUnusedGlobalSymbols
 export const load = async ({ params }) => {
 	const { TrainAnnouncement, INFO } = await fetchAnnouncements(params);
 	return {
 		sseUrl: INFO?.SSEURL,
-		branches: branches(TrainAnnouncement)
+		TrainAnnouncement
 	};
 };
 

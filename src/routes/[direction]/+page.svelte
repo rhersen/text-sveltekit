@@ -1,9 +1,10 @@
 <script>
 	import { onDestroy, onMount } from 'svelte';
 	import Branch from '$lib/components/Branch.svelte';
-	import { line1, line2 } from '$lib/formatLatestAnnouncement';
+	import grouped from '$lib/branches.js';
 
 	export let data;
+	let branches = grouped(data.TrainAnnouncement);
 	let eventSource;
 
 	onMount(() => {
@@ -13,17 +14,8 @@
 		eventSource.onmessage = ({ data: s }) => {
 			const { RESPONSE } = JSON.parse(s);
 			const [{ TrainAnnouncement }] = RESPONSE.RESULT;
-			console.log(TrainAnnouncement);
-			// const updated = data.announcements;
-			for (let i = 0; i < TrainAnnouncement.length; i++)
-				console.log(line1(TrainAnnouncement[i]), line2(TrainAnnouncement[i]));
-			// const found = data.announcements.findIndex(
-			// 		({ AdvertisedTrainIdent }) =>
-			// 				AdvertisedTrainIdent === TrainAnnouncement[i].AdvertisedTrainIdent
-			// );
-			// if (found >= 0) updated[found] = TrainAnnouncement[i];
-
-			// data.announcements = updated;
+			data.TrainAnnouncement = [...TrainAnnouncement, ...data.TrainAnnouncement];
+			branches = grouped(data.TrainAnnouncement);
 		};
 	});
 
@@ -33,11 +25,11 @@
 </script>
 
 <div class="parent">
-	<Branch trains={data.branches.nw ?? []} div="1" />
-	<Branch trains={data.branches.ne ?? []} div="2" />
-	<Branch trains={data.branches.c ?? []} div="3" />
-	<Branch trains={data.branches.sw ?? []} div="4" />
-	<Branch trains={data.branches.se ?? []} div="5" />
+	<Branch trains={branches.nw ?? []} div="1" />
+	<Branch trains={branches.ne ?? []} div="2" />
+	<Branch trains={branches.c ?? []} div="3" />
+	<Branch trains={branches.sw ?? []} div="4" />
+	<Branch trains={branches.se ?? []} div="5" />
 </div>
 
 <style>
