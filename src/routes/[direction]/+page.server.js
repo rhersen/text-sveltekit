@@ -8,7 +8,7 @@ import branchDivider from '$lib/branchDivider.js';
 export const load = async ({ params }) => {
 	const announcements = await fetchAnnouncements(params);
 	const trains = currentTrains(announcements.TrainAnnouncement);
-	const grouped = _.groupBy(trains, branchDivider);
+	const grouped = _.groupBy(trains, (train) => branchDivider(train.latest));
 
 	return {
 		sseUrl: announcements.INFO?.SSEURL,

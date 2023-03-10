@@ -1,8 +1,8 @@
 import * as wgs from './wgs';
 
-export default (train) => {
-	if (!train.latest) return '';
-	const location = train.latest.LocationSignature;
+export default (announcement) => {
+	if (!announcement) return '';
+	const location = announcement.LocationSignature;
 	const north = wgs.north(location);
 	if (!north) return '';
 
