@@ -1,0 +1,42 @@
+<script>
+	import { line1, line2 } from '$lib/formatLatestAnnouncement';
+	import getColor from '$lib/color';
+
+	export let trains;
+	export let div;
+</script>
+
+<div class="div{div}">
+	{#each trains as train}
+		<div class="train" key={train.latest.AdvertisedTrainIdent}>
+			<div style="color: {getColor(train.latestDeparture || train.latest)}">
+				{line1(train)}
+			</div>
+			<div style="color: {getColor(train.latestDeparture || train.latest)}">
+				{line2(train)}
+			</div>
+		</div>
+	{/each}
+</div>
+
+<style>
+	div {
+		background-color: black;
+	}
+
+    .div1 {
+        grid-area: 1 / 1 / 2 / 3;
+    }
+    .div2 {
+        grid-area: 1 / 3 / 2 / 5;
+    }
+    .div3 {
+        grid-area: 2 / 2 / 3 / 4;
+    }
+    .div4 {
+        grid-area: 3 / 1 / 4 / 3;
+    }
+    .div5 {
+        grid-area: 3 / 3 / 4 / 5;
+    }
+</style>
