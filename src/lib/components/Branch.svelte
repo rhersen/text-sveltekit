@@ -10,15 +10,16 @@
 	{#each trains as train}
 		<div class="train">
 			<div style="color: {getColor(train.latestDeparture || train.latest)}">
-				{line1(train)}
+				{line1(train.latest)}
 			</div>
 			<div style="color: {getColor(train.latestDeparture || train.latest)}">
-				{line2(train)}
+				{line2(train.latest)}
 			</div>
 		</div>
 	{/each}
 </div>
 
+<!--suppress CssUnusedSymbol -->
 <style>
 	div {
 		background-color: black;

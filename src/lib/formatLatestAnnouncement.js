@@ -2,9 +2,7 @@ import _ from 'lodash';
 import { differenceInSeconds, parseISO } from 'date-fns';
 import locations from '$lib/filtered.json';
 
-export function line1(train) {
-	const a = train.latest;
-
+export function line1(a) {
 	if (!a) return 'Aktuell information saknas';
 
 	return `${id(a)} mot ${_.map(_.map(a.ToLocation, 'LocationName'), (loc) =>
@@ -12,9 +10,7 @@ export function line1(train) {
 	)} ${precision(a)}`;
 }
 
-export function line2(train) {
-	const a = train.latest;
-
+export function line2(a) {
 	if (!a) return 'line2';
 
 	return `${activity(a)} ${location(a)} kl ${a.TimeAtLocationWithSeconds.substring(11, 19)}`;

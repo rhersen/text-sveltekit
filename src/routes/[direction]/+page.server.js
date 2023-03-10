@@ -7,12 +7,12 @@ import branchDivider from '$lib/branchDivider.js';
 
 // noinspection JSUnusedGlobalSymbols
 export const load = async ({ params }) => {
-	const response = await fetchAnnouncements(params);
-	const trains = currentTrains(locations, response);
+	const announcements = await fetchAnnouncements(params);
+	const trains = currentTrains(locations, announcements.TrainAnnouncement);
 	const grouped = _.groupBy(trains, branchDivider(locations));
 
 	return {
-		trains,
+		sseUrl: announcements.INFO?.SSEURL,
 		...grouped
 	};
 };
@@ -35,7 +35,7 @@ async function fetchAnnouncements({ direction }) {
 
 	const { RESPONSE } = await r.json();
 	const [announcements] = RESPONSE.RESULT;
-	return announcements.TrainAnnouncement;
+	return announcements;
 }
 
 const locationSignature = [
@@ -53,7 +53,7 @@ function getBody(direction) {
 	return `
         <REQUEST>
             <LOGIN authenticationkey='${process.env.TRAFIKVERKET_API_KEY}'/>
-            <QUERY sseurl='false' objecttype='TrainAnnouncement' orderby='TimeAtLocationWithSeconds' schemaversion='1.6'>
+            <QUERY sseurl='true' objecttype='TrainAnnouncement' orderby='TimeAtLocationWithSeconds' schemaversion='1.6'>
                 <FILTER>
                     <OR>
                         <AND>
