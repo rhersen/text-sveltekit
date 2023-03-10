@@ -17,23 +17,7 @@
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: repeat(3, 1fr);
-		grid-column-gap: 0px;
-		grid-row-gap: 0px;
-	}
-
-	.div1 {
-		grid-area: 1 / 1 / 2 / 3;
-	}
-	.div2 {
-		grid-area: 1 / 3 / 2 / 5;
-	}
-	.div3 {
-		grid-area: 2 / 2 / 3 / 4;
-	}
-	.div4 {
-		grid-area: 3 / 1 / 4 / 3;
-	}
-	.div5 {
-		grid-area: 3 / 3 / 4 / 5;
+		grid-column-gap: 0;
+		grid-row-gap: 0;
 	}
 </style>
