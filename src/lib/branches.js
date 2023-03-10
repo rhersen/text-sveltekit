@@ -1,7 +1,12 @@
 import _ from 'lodash';
 import * as wgs from './wgs';
+import branchDivider from '$lib/branchDivider.js';
 
-export default function currentTrains(announcement) {
+export default function branches(TrainAnnouncement) {
+	return _.groupBy(currentTrains(TrainAnnouncement), (train) => branchDivider(train.latest));
+}
+
+function currentTrains(announcement) {
 	const grouped = _.groupBy(announcement, 'AdvertisedTrainIdent');
 	const includingUndefineds = _.map(grouped, selectLatest);
 	const noUndefineds = _.filter(includingUndefineds, 'latest');

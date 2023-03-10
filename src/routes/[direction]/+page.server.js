@@ -1,18 +1,13 @@
 import { error } from '@sveltejs/kit';
 import { formatISO, sub } from 'date-fns';
-import currentTrains from '$lib/currentTrains.js';
-import _ from 'lodash';
-import branchDivider from '$lib/branchDivider.js';
+import branches from '$lib/branches.js';
 
 // noinspection JSUnusedGlobalSymbols
 export const load = async ({ params }) => {
-	const announcements = await fetchAnnouncements(params);
-	const trains = currentTrains(announcements.TrainAnnouncement);
-	const grouped = _.groupBy(trains, (train) => branchDivider(train.latest));
-
+	const { TrainAnnouncement, INFO } = await fetchAnnouncements(params);
 	return {
-		sseUrl: announcements.INFO?.SSEURL,
-		...grouped
+		sseUrl: INFO?.SSEURL,
+		branches: branches(TrainAnnouncement)
 	};
 };
 

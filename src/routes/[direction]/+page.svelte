@@ -13,6 +13,7 @@
 		eventSource.onmessage = ({ data: s }) => {
 			const { RESPONSE } = JSON.parse(s);
 			const [{ TrainAnnouncement }] = RESPONSE.RESULT;
+			console.log(TrainAnnouncement);
 			// const updated = data.announcements;
 			for (let i = 0; i < TrainAnnouncement.length; i++)
 				console.log(line1(TrainAnnouncement[i]), line2(TrainAnnouncement[i]));
@@ -32,11 +33,11 @@
 </script>
 
 <div class="parent">
-	<Branch trains={data.nw ?? []} div="1" />
-	<Branch trains={data.ne ?? []} div="2" />
-	<Branch trains={data.c ?? []} div="3" />
-	<Branch trains={data.sw ?? []} div="4" />
-	<Branch trains={data.se ?? []} div="5" />
+	<Branch trains={data.branches.nw ?? []} div="1" />
+	<Branch trains={data.branches.ne ?? []} div="2" />
+	<Branch trains={data.branches.c ?? []} div="3" />
+	<Branch trains={data.branches.sw ?? []} div="4" />
+	<Branch trains={data.branches.se ?? []} div="5" />
 </div>
 
 <style>
