@@ -1,9 +1,9 @@
 import * as wgs from './wgs';
 
-export default (locations) => (train) => {
+export default (train) => {
 	if (!train.latest) return '';
 	const location = train.latest.LocationSignature;
-	const north = wgs.north(location, locations);
+	const north = wgs.north(location);
 	if (!north) return '';
 
 	return north > 59.354 ? n() : s();
@@ -21,7 +21,7 @@ export default (locations) => (train) => {
 	}
 
 	function leftRight(limit) {
-		const east = wgs.east(location, locations);
+		const east = wgs.east(location);
 		if (!east) return '';
 		return east < limit ? 'w' : 'e';
 	}

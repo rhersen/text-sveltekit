@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import * as wgs from './wgs';
 
-export default function currentTrains(locations, announcement) {
+export default function currentTrains(announcement) {
 	const grouped = _.groupBy(announcement, 'AdvertisedTrainIdent');
 	const includingUndefineds = _.map(grouped, selectLatest);
 	const noUndefineds = _.filter(includingUndefineds, 'latest');
@@ -75,10 +75,10 @@ export default function currentTrains(locations, announcement) {
 		if (location === 'Gdv') return between('Ngd', 'Nyh');
 		if (location === 'Söc') return between('Söd', 'Söu');
 		if (location === 'Gn') return between('Mö', 'Ssä');
-		return wgs.north(location, locations);
+		return wgs.north(location);
 	}
 
 	function between(loc1, loc2) {
-		return 0.5 * wgs.north(loc1, locations) + 0.5 * wgs.north(loc2, locations);
+		return 0.5 * wgs.north(loc1) + 0.5 * wgs.north(loc2);
 	}
 }
