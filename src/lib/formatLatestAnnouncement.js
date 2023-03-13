@@ -25,6 +25,9 @@ function id(a) {
 }
 
 function stationName(locationSignature) {
+	if (locationSignature === 'Sci') return locationSignature;
+	if (locationSignature === 'Upv') return locationSignature;
+	if (locationSignature === 'Vhe') return locationSignature;
 	return locations[locationSignature]?.AdvertisedShortLocationName ?? locationSignature;
 }
 
