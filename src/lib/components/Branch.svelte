@@ -24,6 +24,7 @@
 	div {
 		background-color: black;
 		font-family: 'PT Sans Narrow', 'Arial Narrow', Arial, sans-serif;
+		font-size: 12px;
 	}
 
 	.div1 {
