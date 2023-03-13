@@ -5,7 +5,7 @@ import locations from '$lib/filtered.json';
 export function line1(a) {
 	if (!a) return 'Aktuell information saknas';
 
-	return `${id(a)} mot ${_.map(_.map(a.ToLocation, 'LocationName'), (loc) =>
+	return `${id(a)} ${_.map(_.map(a.ToLocation, 'LocationName'), (loc) =>
 		stationName(loc)
 	)} ${precision(a)}`;
 }
