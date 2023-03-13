@@ -5,7 +5,7 @@ import locations from '$lib/filtered.json';
 export function line1(a) {
 	if (!a) return 'Aktuell information saknas';
 
-	return `${id(a)} ${_.map(_.map(a.ToLocation, 'LocationName'), (loc) =>
+	return `${id(a)} mot ${_.map(_.map(a.ToLocation, 'LocationName'), (loc) =>
 		stationName(loc)
 	)} ${precision(a)}`;
 }
@@ -13,7 +13,7 @@ export function line1(a) {
 export function line2(a) {
 	if (!a) return 'line2';
 
-	return `${activity(a)} ${location(a)} ${a.TimeAtLocationWithSeconds.substring(11, 19)}`;
+	return `${activity(a)} ${location(a)} kl ${a.TimeAtLocationWithSeconds.substring(11, 19)}`;
 
 	function location(announcement) {
 		return stationName(announcement.LocationSignature);
@@ -25,9 +25,6 @@ function id(a) {
 }
 
 function stationName(locationSignature) {
-	if (locationSignature === 'Sod') return locationSignature;
-	if (locationSignature === 'Upv') return locationSignature;
-	if (locationSignature === 'Vhe') return locationSignature;
 	return locations[locationSignature]?.AdvertisedShortLocationName ?? locationSignature;
 }
 

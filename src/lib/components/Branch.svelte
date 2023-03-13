@@ -23,6 +23,7 @@
 <style>
 	div {
 		background-color: black;
+		font-family: 'PT Sans Narrow', 'Arial Narrow', Arial, sans-serif;
 	}
 
 	.div1 {
