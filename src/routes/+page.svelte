@@ -5,6 +5,18 @@
 
 	export let data;
 
+	let north = grouped(
+		data.TrainAnnouncement.filter(({ AdvertisedTrainIdent }) =>
+			/[02468]$/.test(AdvertisedTrainIdent)
+		)
+	);
+
+	let south = grouped(
+		data.TrainAnnouncement.filter(({ AdvertisedTrainIdent }) =>
+			/[13579]$/.test(AdvertisedTrainIdent)
+		)
+	);
+
 	let eventSource;
 
 	onMount(() => {
@@ -15,7 +27,18 @@
 			const { RESPONSE } = JSON.parse(s);
 			const [{ TrainAnnouncement }] = RESPONSE.RESULT;
 			data.TrainAnnouncement = [...TrainAnnouncement, ...data.TrainAnnouncement];
-			// branches = grouped(data.TrainAnnouncement);
+
+			north = grouped(
+				data.TrainAnnouncement.filter(({ AdvertisedTrainIdent }) =>
+					/[02468]$/.test(AdvertisedTrainIdent)
+				)
+			);
+
+			south = grouped(
+				data.TrainAnnouncement.filter(({ AdvertisedTrainIdent }) =>
+					/[13579]$/.test(AdvertisedTrainIdent)
+				)
+			);
 		};
 	});
 
@@ -25,22 +48,10 @@
 </script>
 
 <div>Norrgående</div>
-<Direction
-	branches={grouped(
-		data.TrainAnnouncement.filter(({ AdvertisedTrainIdent }) =>
-			/[02468]$/.test(AdvertisedTrainIdent)
-		)
-	)}
-/>
+<Direction branches={north} />
 
 <div>Södergående</div>
-<Direction
-	branches={grouped(
-		data.TrainAnnouncement.filter(({ AdvertisedTrainIdent }) =>
-			/[13579]$/.test(AdvertisedTrainIdent)
-		)
-	)}
-/>
+<Direction branches={south} />
 
 <style>
 	div {

@@ -35,7 +35,7 @@ const locationSignature = [
 	'Söd,Öte,Rön,Tu,Tul,Flb,Hu,Sta',
 	'Äs,Åbe,Sst,Sci,Sod',
 	'So,Udl,Hel,Sol,Hgv,Nvk,R,Upv,Rs,Mr',
-	'Nyc,Gdv,Ngd,Öso,Ss,Hfa,Ts,Kda,Vhe,Jbo,Hnd,Vga,Skg,Tåd,Fas',
+	'Vhe,Jbo,Hnd,Vga,Skg,Tåd,Fas',
 	'Sub,Spå,Bkb,Jkb,Khä'
 ];
 const signatures = locationSignature.join(',');
@@ -46,7 +46,7 @@ function getBody() {
 	return `
         <REQUEST>
             <LOGIN authenticationkey='${process.env.TRAFIKVERKET_API_KEY}'/>
-            <QUERY sseurl='false' objecttype='TrainAnnouncement' orderby='TimeAtLocationWithSeconds' schemaversion='1.6'>
+            <QUERY sseurl='true' objecttype='TrainAnnouncement' orderby='TimeAtLocationWithSeconds' schemaversion='1.6'>
                 <FILTER>
                     <OR>
                         <AND>
