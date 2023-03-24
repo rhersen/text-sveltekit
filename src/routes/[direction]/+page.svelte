@@ -35,8 +35,8 @@
 <style>
 	.parent {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: repeat(3, 1fr);
+		grid-template-columns: 2fr 2fr 3fr 1fr;
+		grid-template-rows: repeat(3, auto);
 		grid-column-gap: 0;
 		grid-row-gap: 0;
 	}

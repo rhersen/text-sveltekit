@@ -5,7 +5,7 @@ import locations from '$lib/filtered.json';
 export function line1(a) {
 	if (!a) return 'Aktuell information saknas';
 
-	return `${id(a)} ${_.map(_.map(a.ToLocation, 'LocationName'), (loc) =>
+	return `${id(a)} mot ${_.map(_.map(a.ToLocation, 'LocationName'), (loc) =>
 		stationName(loc)
 	)} ${precision(a)}`;
 }
@@ -25,9 +25,6 @@ function id(a) {
 }
 
 function stationName(locationSignature) {
-	if (locationSignature === 'Sci') return locationSignature;
-	if (locationSignature === 'Upv') return locationSignature;
-	if (locationSignature === 'Vhe') return locationSignature;
 	return locations[locationSignature]?.AdvertisedShortLocationName ?? locationSignature;
 }
 
@@ -37,7 +34,7 @@ function precision(a) {
 		parseISO(a.AdvertisedTimeAtLocation)
 	);
 
-	if (delay > 120) return `${Math.trunc(delay / 60)} min`;
+	if (delay > 120) return `${Math.trunc(delay / 60)} minuter sent`;
 	if (delay > 30) return `${delay}s sent`;
 	if (delay < -60) return 'i god tid';
 	return 'i tid';

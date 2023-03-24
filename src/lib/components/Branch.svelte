@@ -6,7 +6,7 @@
 	export let div;
 </script>
 
-<div class="div{div}">
+<div class="branch div{div}">
 	{#each trains as train}
 		<div class="train">
 			<div style="color: {getColor(train.latestDeparture || train.latest)}">
@@ -21,10 +21,12 @@
 
 <!--suppress CssUnusedSymbol -->
 <style>
-	div {
-		background-color: black;
+	.branch {
 		font-family: 'PT Sans Narrow', 'Arial Narrow', Arial, sans-serif;
 		font-size: 14px;
+		background: #222222;
+		border: 0.3px solid red;
+		white-space: nowrap;
 	}
 
 	.div1 {
