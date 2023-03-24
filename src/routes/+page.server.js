@@ -10,11 +10,11 @@ export const load = async ({ params }) => {
 	};
 };
 
-async function fetchAnnouncements({ direction }) {
+async function fetchAnnouncements() {
 	console.time('fetch');
 	const r = await fetch('https://api.trafikinfo.trafikverket.se/v2/data.json', {
 		method: 'POST',
-		body: getBody(direction),
+		body: getBody(),
 		headers: {
 			'Content-Type': 'application/xml',
 			Accept: 'application/json'
@@ -40,13 +40,13 @@ const locationSignature = [
 ];
 const signatures = locationSignature.join(',');
 
-function getBody(direction) {
+function getBody() {
 	const now = Date.now();
 	const since = formatISO(sub(now, { minutes: 16 }));
 	return `
         <REQUEST>
             <LOGIN authenticationkey='${process.env.TRAFIKVERKET_API_KEY}'/>
-            <QUERY sseurl='true' objecttype='TrainAnnouncement' orderby='TimeAtLocationWithSeconds' schemaversion='1.6'>
+            <QUERY sseurl='false' objecttype='TrainAnnouncement' orderby='TimeAtLocationWithSeconds' schemaversion='1.6'>
                 <FILTER>
                     <OR>
                         <AND>
@@ -55,9 +55,6 @@ function getBody(direction) {
                         </AND>
                         <IN name='LocationSignature' value='Tmö,Kmy,Skby,Bra,Gau,Södy,Uts,Kng,Hön,Huv,Duo'/>
                     </OR>
-                    <LIKE name='AdvertisedTrainIdent' value='/[${
-											direction === 'n' ? '02468' : '13579'
-										}]$/'/>
                     <GT name='TimeAtLocation' value='${since}'/>
                 </FILTER>
                 <INCLUDE>ActivityType</INCLUDE>
