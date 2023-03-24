@@ -39,5 +39,6 @@
 		grid-template-rows: repeat(3, auto);
 		grid-column-gap: 0;
 		grid-row-gap: 0;
+		background-color: lightcyan;
 	}
 </style>
