@@ -20,6 +20,11 @@ export function line2(a) {
 	}
 }
 
+export function classNew(a) {
+	const secondsAgo = differenceInSeconds(new Date(), parseISO(a.TimeAtLocationWithSeconds));
+	return secondsAgo < 30 ? 'new' : 'old';
+}
+
 function id(a) {
 	return a.AdvertisedTrainIdent;
 }
